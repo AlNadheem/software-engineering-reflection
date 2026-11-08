@@ -1,0 +1,270 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>My Thoughts on what is Software Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow reading column; index is a plain table-of-contents list, essays open in place. */
+:root {
+  --bg: #F2F3F5;          /* Antiflash White */
+  --ink: #000000;
+  --muted: #000000;
+  --rule: #C8C8C8;
+  --accent: #000000;
+  --accent-soft: #E4E4E4;
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding-inline: 20px;
+  padding-block: 3.5rem 4rem;
+}
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+/* Masthead */
+header.mast { display: grid; gap: .35rem; padding-bottom: 1.75rem; border-bottom: 1px solid var(--rule); }
+.mast .home {
+  text-decoration: none;
+  color: var(--ink);
+  justify-self: start;
+  display: inline-block;
+  transform-origin: left center;
+  transition: transform .18s ease;
+}
+.mast .home:hover { transform: scale(1.025); }
+.mast h1 {
+  margin: 0;
+  font-weight: 500;
+  font-size: clamp(2.4rem, 7vw, 3.4rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.mast p { margin: 0; color: var(--muted); font-size: 1.05rem; max-width: 34rem; }
+.label {
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Index list */
+ol.index { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+ol.index li { border-bottom: 1px solid var(--rule); }
+ol.index a {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .25rem;
+  padding-block: 1.4rem;
+  text-decoration: none;
+  color: var(--ink);
+  transform-origin: left center;
+  transition: transform .18s ease;
+}
+ol.index a:hover { transform: scale(1.015); }
+.entry-body { min-width: 0; display: grid; gap: .3rem; }
+.entry-body h2 { margin: 0; font-size: 1.45rem; font-weight: 500; line-height: 1.25; text-wrap: balance; transition: color .15s; }
+.entry-body p { margin: 0; color: var(--muted); font-size: 1.02rem; }
+.meta { display: flex; flex-wrap: wrap; gap: .4rem 1rem; }
+.topic-tag { color: var(--accent); }
+.empty { color: var(--muted); padding-block: 2rem; }
+
+/* Article */
+article { padding-top: 2rem; }
+.back {
+  font-family: var(--mono); font-size: .78rem; text-decoration: none;
+  display: inline-flex; gap: .4rem; color: var(--muted);
+  transform-origin: left center;
+  transition: transform .18s ease;
+}
+.back:hover { transform: scale(1.05); }
+article header { display: grid; gap: .6rem; margin-block: 1.5rem 2rem; }
+article h2 { margin: 0; font-size: clamp(1.9rem, 5vw, 2.5rem); font-weight: 500; line-height: 1.15; letter-spacing: -0.015em; text-wrap: balance; }
+article .lede { margin: 0; font-style: italic; color: var(--muted); font-size: 1.2rem; }
+.prose { display: grid; gap: 1.1rem; }
+.prose p { margin: 0; }
+.prose h3 { margin: 1rem 0 0; font-size: 1.15rem; font-weight: 600; }
+.prose blockquote {
+  margin: .25rem 0; padding: .1rem 0 .1rem 1.1rem;
+  border-left: 2px solid var(--accent); font-style: italic; color: var(--ink);
+}
+.prose ul { margin: 0; padding-left: 1.2rem; display: grid; gap: .35rem; }
+.takeaway {
+  margin-top: 1.5rem; padding: 1rem 1.2rem; background: var(--accent-soft);
+  border-radius: 4px; display: grid; gap: .35rem;
+}
+.takeaway p { margin: 0; }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
+.pager a { text-decoration: none; display: grid; gap: .15rem; max-width: 48%; min-width: 0; transform-origin: left center; transition: transform .18s ease; }
+.pager a.next { text-align: right; margin-left: auto; }
+.pager a.next { transform-origin: right center; }
+.pager span.t { color: var(--ink); }
+.pager a:hover { transform: scale(1.035); }
+
+footer { margin-top: 3.5rem; color: var(--muted); font-size: .95rem; }
+
+@media (max-width: 520px) {
+  ol.index a { grid-template-columns: 1fr; }
+  .pager a { max-width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  .mast .home:hover, ol.index a:hover, .back:hover, .pager a:hover { transform: none; }
+}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <a class="home" href="#" aria-label="My Thoughts on what is Software Engineering, home"><h1>My Thoughts on what is Software Engineering</h1></a>
+    <p>A small library of reflections and essays written alongside a course in Software Engineering. One entry per topic covered.</p>
+  </header>
+
+  <main id="view"></main>
+
+  <footer>
+    <span class="label">My Thoughts · Software Engineering reflections</span>
+  </footer>
+</div>
+
+<script>
+/* ---- Articles: add a new object here to publish a new reflection ---- */
+const ARTICLES = [
+  {
+    slug: "software-processes",
+    topic: "Software Processes",
+    date: "2026-11-08",
+    title: "Software Processes",
+    lede: "How comparing development approaches changed the way I choose a process.",
+    body: `
+<p>A software process is an organized set of activities used to develop, deliver, and maintain a software system. In our lesson, I studied the Waterfall, V-Model, Iterative, Incremental, Spiral, Agile, Prototyping, and DevOps approaches. Waterfall follows a linear sequence, while the V-Model connects development stages with corresponding verification and validation activities. Iterative development repeatedly improves a system, whereas Incremental development delivers it in smaller functional parts. The Spiral model focuses on risk analysis, and Prototyping helps developers explore unclear requirements. Agile supports frequent delivery and customer feedback, while DevOps connects development and operations to support continuous delivery. The examples in the lesson showed that these approaches organize requirements, design, implementation, testing, deployment, and evaluation in different ways. I also learned that approaches are not always mutually exclusive because a project may combine Agile with DevOps or use Prototyping within another process.</p>
+<p>Comparing these models helped me understand that no single process is suitable for every software project. Before this lesson, I thought developers only had to select the most modern process and follow its steps. I now understand that the choice depends on the stability of the requirements, the level of risk, the need for documentation, the frequency of delivery, customer involvement, and the cost of making changes. Waterfall may be suitable when requirements are stable, while an Iterative or Agile approach is more useful when feedback and changing conditions are expected. I initially found it difficult to distinguish Iterative development from Incremental development because both involve building software gradually. The examples helped me see that iteration improves an existing version, while an increment adds another usable part. This distinction showed me why requirements, design, testing, deployment, and changing project conditions must all be considered when choosing a process.</p>
+<p>To improve my understanding, I will analyze more project scenarios and justify which process model or combination of models would be appropriate for each one. I will pay particular attention to project risks, regulatory requirements, customer availability, and the expected rate of change. I also want to learn how process improvement can be supported by evidence such as development time, number of defects, rework, delivery frequency, and stakeholder feedback. Instead of assuming that a process is effective because it is popular, I will examine whether it produces better results for a specific team and project. At present, I can explain the main differences among the software process models and make a basic recommendation for a small project. However, I still need experience adapting a process when several technical and organizational conditions must be balanced.</p>`
+  },
+  {
+    slug: "agile-software-development",
+    topic: "Agile Software Development",
+    date: "2026-11-08",
+    title: "Agile Software Development",
+    lede: "Why flexibility still requires discipline, communication, and technical care.",
+    body: `
+<p>Agile software development focuses on incremental delivery, customer involvement, collaboration, simplicity, and responsiveness to change. The Agile values emphasize individuals and interactions, working software, customer collaboration, and responding to change. In the lesson, I studied how requirements can be expressed as user stories and divided into smaller development tasks. I also learned about Scrum, where work is organized through a product backlog, sprint backlog, short sprints, daily coordination, sprint reviews, and retrospectives. A potentially shippable product increment is expected at the end of a sprint. Other Agile practices include frequent releases, test-first development, refactoring, continuous integration, and close communication with customers. These practices allow a team to receive feedback before too much time is spent developing the wrong solution.</p>
+<p>This lesson corrected my earlier belief that Agile meant doing less planning or changing the project without control. I learned that Agile still requires discipline because the team must prioritize work, communicate regularly, maintain quality, and produce useful increments. Writing user stories can appear simple, but it is challenging to make each story small, valuable, clear, and testable. I also realized that refactoring is not just rewriting code for personal preference; its purpose is to prevent the system’s structure from becoming difficult to maintain as changes are added. Test-first development further connects implementation with expected behavior by requiring tests to be considered early. However, Agile becomes more challenging in large organizations because distributed teams, regulations, contracts, shared systems, different stakeholders, and existing company procedures require more documentation and coordination. This showed me that Agile practices must sometimes be combined with plan-driven activities.</p>
+<p>I will improve by practicing how to divide large features into user stories that can realistically be completed within a sprint. I will attach clear acceptance criteria to each story and explain the value it provides to the user. In future group projects, I will participate more actively in sprint planning, progress discussions, reviews, and retrospectives so that I can develop better communication and estimation skills. I will also apply test-first development and refactoring to small programming exercises before trying them in a larger system. To understand scaling, I plan to study how multiple Scrum teams coordinate architecture, releases, and dependencies. I currently understand Agile principles and the basic Scrum cycle, but my experience is still based mainly on coursework and small projects. I can follow an Agile workflow, although I still need to improve my estimation, teamwork, and consistent use of its technical practices.</p>`
+  },
+  {
+    slug: "requirements-engineering",
+    topic: "Requirements Engineering",
+    date: "2026-11-08",
+    title: "Requirements Engineering",
+    lede: "Learning to turn stakeholder needs into clear and measurable requirements.",
+    body: `
+<p>Requirements engineering is the process of discovering, analyzing, documenting, validating, and managing the services and constraints of a software system. Functional requirements describe what the system must do, while non-functional requirements describe how well it must operate or which constraints it must follow. In the Online Laboratory Equipment Reservation System activity, the scenario required students and faculty members to log in, search for equipment, view availability, submit reservations, and modify or cancel them. Laboratory technicians needed to approve or reject requests, record the release and return of equipment, and update its condition and availability. The coordinator also needed reservation records and usage reports. The activity required user stories and non-functional requirements for security, availability, and reliability. Our related lessons also covered performance, usability, compatibility, recovery, and capacity as measurable quality concerns.</p>
+<p>This activity helped me understand that a requirement should be correct, clear, consistent, testable, modifiable, and traceable to its source. A user story must communicate who needs a function, what the user wants, and why it provides value. However, a short user story may still be incomplete without acceptance criteria. I found non-functional requirements more difficult because words such as “fast,” “secure,” and “reliable” can have different meanings. A statement such as “the system should respond quickly” does not provide enough information for testing. It becomes more useful when it states a measurable response time, the operation being tested, and the relevant conditions. The reservation scenario also showed the importance of requirements such as preventing two users from reserving the same equipment for the same period and allowing only authorized personnel to approve requests or change equipment records. These requirements directly affect the usefulness and trustworthiness of the system.</p>
+<p>In future activities, I will assign an identifier to each requirement and connect it to its stakeholder, acceptance criteria, design element, and test case. For user stories, I will check that they are independent, negotiable, valuable, estimable, small, and testable. When writing a non-functional requirement, I will identify the quality attribute, measurement method, target value, operating condition, and expected result. I will also maintain a change record so that the effects of a revised requirement can be traced to the design and tests. At present, I can distinguish functional and non-functional requirements and write basic user stories. However, I still need practice selecting realistic measurements and discovering conflicts among stakeholder needs. My current ability is appropriate for a small academic project, but I would still need guidance when preparing a complete requirements specification for a larger system.</p>`
+  },
+  {
+    slug: "system-modeling",
+    topic: "System Modeling",
+    date: "2026-11-08",
+    title: "System Modeling",
+    lede: "How simplified views make complex systems easier to examine and discuss.",
+    body: `
+<p>System modeling represents a software system through simplified views so that its boundaries, interactions, structure, and behavior are easier to understand. Context models show the system and its external environment, interaction models describe communication between users or components, structural models show how data or objects are organized, and behavioral models represent activities, events, or state changes. Model-Driven Architecture extends this idea by using abstract models that can be transformed into more platform-specific designs and implementations. In our system-modeling activity, the task was to complete a table containing modeling techniques, objectives, symbols, and references. The provided example was a UML activity diagram, described as a model that shows the activities in a process and the flow of control from one activity to another. Examining this example required me to consider how actions, control flows, decisions, and beginning and ending points communicate a process.</p>
+<p>The activity helped me see that models are not simply drawings added to a report. A useful model reduces complexity and gives developers and stakeholders a shared way to discuss the system before all of its code exists. An activity diagram, for example, can make a workflow easier to follow and may reveal a missing action, an unclear decision, or an incorrect sequence. My main challenge was understanding which UML symbols should be used and how much detail a model should contain. Some symbols look similar but have different meanings, such as decision and merge nodes or forks and joins. Using an incorrect symbol may cause readers to interpret the process differently from what was intended. I therefore learned that a model must be both visually understandable and technically accurate, and it must remain consistent with the system requirements.</p>
+<p>To improve, I will create a reference sheet of common UML symbols, their meanings, and simple examples. Before drawing a diagram, I will first describe the workflow in sentences and identify the actors, actions, decisions, loops, parallel activities, and system boundaries. I will then verify every path to ensure that it starts and ends correctly and that the conditions on decision branches are clear. I also plan to represent one small system through context, interaction, structural, and behavioral models so that I can compare the information provided by each view. At present, I can understand the purpose of common system models and interpret a simple activity diagram. However, my knowledge of more complex UML notation and concurrent processes is still limited. I need further modeling exercises before I can create detailed diagrams confidently without checking references.</p>`
+  },
+  {
+    slug: "architectural-design",
+    topic: "Architectural Design",
+    date: "2026-11-08",
+    title: "Architectural Design",
+    lede: "Understanding architecture as a set of justified decisions and trade-offs.",
+    body: `
+<p>Architectural design defines the high-level organization of a software system, including its major components, their responsibilities, and their relationships. Our lesson showed that architectural decisions are strongly influenced by non-functional requirements. Performance may require related operations to be located within a small number of components, while security may require a layered structure that protects critical assets in the innermost layers. Safety may require safety-related functions to be placed together, availability may require redundant components, and maintainability may benefit from smaller self-contained components. I also studied the logical, process, development, and physical architectural views, which respectively show system abstractions, runtime processes, code organization, and deployment across hardware. The architectural patterns covered included Model-View-Controller, Layered, Repository, Client-Server, and Pipe-and-Filter.</p>
+<p>This topic helped me understand that architecture is not merely a diagram created before coding. It is a set of important decisions that affect whether a system can meet its quality requirements. I found pattern selection challenging because several patterns may be suitable for different parts of the same system. An online reservation system could use MVC to separate interface concerns, a Layered architecture to organize presentation, business logic, and data access, a Repository for shared reservation data, and Client-Server communication between user devices and a central service. These patterns do not always compete because they may be combined. I also learned that improving one quality can create a trade-off with another. Additional security checks may affect performance or usability, while redundancy may improve availability but increase cost and complexity. Architecture is therefore important because early structural decisions can be difficult and expensive to change later.</p>
+<p>For future architectural work, I will create a short decision record for every major design choice. It will state the problem, alternatives, selected option, advantages, limitations, and quality requirements affected. I will practice connecting each important non-functional requirement to an architectural strategy, such as access-control layers for security, replication for availability, and modular components for maintainability. I also want to draw logical, process, development, and physical views of the same system to check whether they remain consistent. Instead of selecting a pattern only because it is familiar, I will compare its consequences with the priorities of the project. I can currently recognize the common architectural patterns and explain their basic purposes, but I am not yet prepared to design the architecture of a large, distributed, or safety-critical system independently. My proficiency remains at a developing level.</p>`
+  },
+  {
+    slug: "software-testing",
+    topic: "Software Testing",
+    date: "2026-11-08",
+    title: "Software Testing",
+    lede: "Why I now see testing as continuous evidence of quality, not only error-hunting.",
+    body: `
+<p>Software testing evaluates whether software follows its requirements, behaves correctly, and satisfies user needs. Development testing includes unit testing of individual methods or classes, component testing of integrated units and their interfaces, and system testing of the complete integrated system. Release testing evaluates a version intended for use outside the development team and commonly applies black-box tests derived from system specifications. User testing includes alpha testing with selected users working closely with developers, beta testing with a larger group of users, and acceptance testing by customers deciding whether the system is ready for deployment. I also learned about Test-Driven Development, where a test is written before the corresponding functionality, and the code is later refactored while the tests protect its expected behavior. Verification checks whether software meets its stated functional and non-functional requirements, while validation considers whether it meets customer expectations.</p>
+<p>Before studying this topic, I viewed testing mainly as the process of finding errors after programming was finished. The lessons changed my understanding by showing that testing should begin with the requirements and continue throughout development. Requirements-based testing connects at least one test to every requirement, while scenario testing examines how several features work together in a realistic workflow. I also learned that testing can reveal the presence of defects but cannot prove that no defects remain. Testing non-functional requirements requires measurable evidence. Performance can be checked by recording response times, availability by monitoring uptime, compatibility by executing functions on specified platforms, recovery by simulating failure, and capacity by applying a defined number of concurrent users. These examples helped me recognize testing as continuous evidence of system quality and user satisfaction rather than mere error-hunting.</p>
+<p>I will improve my testing skills by deriving test cases directly from identified requirements and recording the requirement ID for each test. For every function, I will include normal inputs, boundary values, invalid inputs, and failure conditions instead of checking only the expected path. I will practice TDD on small programming problems so that I can learn its test-code-refactor cycle without making the exercise too complex. For non-functional tests, I will specify the procedure, expected measurement, actual result, and pass-or-fail status. I also want to gain experience with automated testing, performance tools, and structured user feedback. At present, I can explain the testing levels and create basic unit, system, and requirements-based test cases. However, I still need practical experience designing complete test suites and evaluating quality under realistic operating conditions.</p>`
+  },
+  {
+    slug: "conclusion",
+    topic: "Overall Reflection",
+    date: "2026-11-08",
+    title: "Software Engineering as a Connected Lifecycle",
+    lede: "A final reflection on how the six topics support one another.",
+    body: `
+<p>The six topics helped me understand software engineering as a connected lifecycle rather than a group of separate lessons. The software process establishes how development activities will be organized, while requirements engineering identifies the services and quality constraints the system must satisfy. System models simplify those requirements and allow stakeholders to examine the system from different perspectives. Architectural design then turns them into a high-level structure that balances performance, security, safety, availability, and maintainability. Agile practices support iterative implementation, customer feedback, testing, and adaptation when requirements change. Finally, software testing provides continuing evidence that individual components function correctly, the integrated system follows its specification, and the completed software meets user expectations. A weakness in any stage can affect the stages that follow, which is why communication, traceability, evaluation, and improvement are important throughout the lifecycle. I still have much to learn, but these lessons gave me a stronger foundation and a more realistic understanding of the responsibility involved in developing useful and dependable software.</p>`
+  }
+];
+
+const view = document.getElementById("view");
+const fmtDate = d => new Date(d + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+const readTime = html => Math.max(1, Math.round(html.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length / 220));
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+function renderIndex() {
+  view.innerHTML = `
+    <ol class="index">${ARTICLES.map(a => `
+      <li><a href="#${a.slug}">
+        <span class="entry-body">
+          <span class="meta label"><span class="topic-tag">${esc(a.topic)}</span><span>${fmtDate(a.date)}</span><span>${readTime(a.body)} min read</span></span>
+          <h2>${esc(a.title)}</h2>
+          <p>${esc(a.lede)}</p>
+        </span>
+      </a></li>`).join("")}</ol>
+  `;
+}
+
+function renderArticle(a) {
+  const i = ARTICLES.indexOf(a);
+  const prev = ARTICLES[i - 1], next = ARTICLES[i + 1];
+  view.innerHTML = `
+    <article>
+      <a class="back" href="#">&larr; All reflections</a>
+      <header>
+        <span class="meta label"><span class="topic-tag">${esc(a.topic)}</span><span>${fmtDate(a.date)}</span><span>${readTime(a.body)} min read</span></span>
+        <h2>${esc(a.title)}</h2>
+        <p class="lede">${esc(a.lede)}</p>
+      </header>
+      <div class="prose">${a.body}</div>
+      ${a.takeaway ? `<div class="takeaway"><span class="label">Takeaway</span><p>${esc(a.takeaway)}</p></div>` : ""}
+      <nav class="pager" aria-label="More reflections">
+        ${prev ? `<a href="#${prev.slug}"><span class="label">&larr; Previous</span><span class="t">${esc(prev.title)}</span></a>` : ""}
+        ${next ? `<a class="next" href="#${next.slug}"><span class="label">Next &rarr;</span><span class="t">${esc(next.title)}</span></a>` : ""}
+      </nav>
+    </article>`;
+}
+
+function route() {
+  const slug = location.hash.slice(1);
+  const a = ARTICLES.find(x => x.slug === slug);
+  a ? renderArticle(a) : renderIndex();
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+route();
+</script>
+
+</body></html>

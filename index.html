@@ -145,7 +145,7 @@ const ARTICLES = [
   {
     slug: "software-processes",
     topic: "Software Processes",
-    date: "2026-11-08",
+    date: "2026-10-12",
     title: "Software Processes",
     lede: "How comparing development approaches changed the way I choose a process.",
     body: `
@@ -156,7 +156,7 @@ const ARTICLES = [
   {
     slug: "agile-software-development",
     topic: "Agile Software Development",
-    date: "2026-11-08",
+    date: "2026-10-12",
     title: "Agile Software Development",
     lede: "Why flexibility still requires discipline, communication, and technical care.",
     body: `
@@ -167,7 +167,7 @@ const ARTICLES = [
   {
     slug: "requirements-engineering",
     topic: "Requirements Engineering",
-    date: "2026-11-08",
+    date: "2026-11-02",
     title: "Requirements Engineering",
     lede: "Learning to turn stakeholder needs into clear and measurable requirements.",
     body: `
@@ -178,7 +178,7 @@ const ARTICLES = [
   {
     slug: "system-modeling",
     topic: "System Modeling",
-    date: "2026-11-08",
+    date: "2026-11-03",
     title: "System Modeling",
     lede: "How simplified views make complex systems easier to examine and discuss.",
     body: `
@@ -189,7 +189,7 @@ const ARTICLES = [
   {
     slug: "architectural-design",
     topic: "Architectural Design",
-    date: "2026-11-08",
+    date: "2026-11-05",
     title: "Architectural Design",
     lede: "Understanding architecture as a set of justified decisions and trade-offs.",
     body: `
@@ -200,7 +200,7 @@ const ARTICLES = [
   {
     slug: "software-testing",
     topic: "Software Testing",
-    date: "2026-11-08",
+    date: "2026-11-05",
     title: "Software Testing",
     lede: "Why I now see testing as continuous evidence of quality, not only error-hunting.",
     body: `
@@ -223,7 +223,6 @@ const ARTICLES = [
 
 const view = document.getElementById("view");
 const fmtDate = d => new Date(d + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
-const readTime = html => Math.max(1, Math.round(html.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length / 220));
 const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 function renderIndex() {
@@ -231,7 +230,7 @@ function renderIndex() {
     <ol class="index">${ARTICLES.map(a => `
       <li><a href="#${a.slug}">
         <span class="entry-body">
-          <span class="meta label"><span class="topic-tag">${esc(a.topic)}</span><span>${fmtDate(a.date)}</span><span>${readTime(a.body)} min read</span></span>
+          <span class="meta label"><span class="topic-tag">${esc(a.topic)}</span><span>${fmtDate(a.date)}</span></span>
           <h2>${esc(a.title)}</h2>
           <p>${esc(a.lede)}</p>
         </span>
@@ -246,7 +245,7 @@ function renderArticle(a) {
     <article>
       <a class="back" href="#">&larr; All reflections</a>
       <header>
-        <span class="meta label"><span class="topic-tag">${esc(a.topic)}</span><span>${fmtDate(a.date)}</span><span>${readTime(a.body)} min read</span></span>
+        <span class="meta label"><span class="topic-tag">${esc(a.topic)}</span><span>${fmtDate(a.date)}</span></span>
         <h2>${esc(a.title)}</h2>
         <p class="lede">${esc(a.lede)}</p>
       </header>
